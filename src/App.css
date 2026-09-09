@@ -1,8 +1,23 @@
+/* Importar la fuente exacta del diseño (Poppins) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
 
 /* ==========================================
-   1. ESTRUCTURA Y FONDO GALAXIA
+   1. RESET Y FONDO ESTRELLADO / GALAXIA
    ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #060814;
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -12,12 +27,14 @@
   padding: 30px 20px;
   text-align: center;
   position: relative;
+  
+  /* Fondo Galaxia con múltiples gradientes */
   background: 
-    radial-gradient(circle at 50% 35%, rgba(65, 58, 100, 0.45) 0%, transparent 65%),
-    radial-gradient(circle at 50% 50%, #0d1021 0%, #04050c 100%);
+    radial-gradient(circle at 50% 30%, rgba(53, 50, 80, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(18, 22, 45, 0.8) 0%, #060814 100%);
 }
 
-/* Capa 1: Estrellas brillantes */
+/* Efecto de estrellas dispersas en el fondo usando box-shadow */
 .container::before {
   content: '';
   position: absolute;
@@ -27,39 +44,16 @@
   height: 100%;
   pointer-events: none;
   background-image: 
-    radial-gradient(1.5px 1.5px at 15px 25px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 45px 80px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1.5px 1.5px at 95px 35px, rgba(255, 230, 180, 0.9), rgba(0,0,0,0)),
-    radial-gradient(2.5px 2.5px at 150px 130px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1.5px 1.5px at 220px 180px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 290px 60px, rgba(255, 220, 150, 0.9), rgba(0,0,0,0)),
-    radial-gradient(3px 3px at 350px 170px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1.5px 1.5px at 380px 40px, #ffffff, rgba(0,0,0,0));
+    radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.7), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.9), rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 230px 190px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 310px 80px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 370px 150px, #ffffff, rgba(0,0,0,0));
   background-repeat: repeat;
-  background-size: 320px 320px;
-  opacity: 0.95;
-  animation: starTwinkle 4s infinite alternate ease-in-out;
-}
-
-/* Capa 2: Polvo estelar */
-.container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  background-image: 
-    radial-gradient(2px 2px at 70px 190px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(3px 3px at 120px 40px, rgba(243, 189, 88, 0.9), rgba(0,0,0,0)),
-    radial-gradient(1.5px 1.5px at 200px 90px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(2.5px 2.5px at 260px 220px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 330px 110px, rgba(160, 180, 255, 0.9), rgba(0,0,0,0));
-  background-repeat: repeat;
-  background-size: 450px 450px;
-  opacity: 0.85;
-  animation: starTwinkle 3s infinite alternate-reverse ease-in-out;
+  background-size: 400px 400px;
+  opacity: 0.6;
 }
 
 /* ==========================================
@@ -73,6 +67,7 @@
   justify-content: center;
 }
 
+/* Anillo exterior de luz */
 .circle-glow {
   width: 150px;
   height: 150px;
@@ -84,17 +79,23 @@
   justify-content: center;
   position: relative;
   z-index: 2;
+  
+  /* Animación del Resplandor Dorado (Glow) */
   animation: glowPulse 3.5s infinite ease-in-out;
 }
 
+/* Estrella principal Flotante */
 .main-star {
   font-size: 64px;
   display: inline-block;
   line-height: 1;
   filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+  
+  /* Animación de subir y bajar */
   animation: floatStar 3s infinite ease-in-out;
 }
 
+/* Badge con la pequeña estrella superior derecha */
 .badge-sparkle {
   position: absolute;
   top: 8px;
@@ -110,9 +111,12 @@
   color: #111425;
   box-shadow: 0 0 12px rgba(242, 186, 82, 0.9);
   z-index: 3;
+  
+  /* Animación de titilado */
   animation: pulseSparkle 2s infinite alternate;
 }
 
+/* Planetas / Esferas flotantes */
 .planet-dot {
   position: absolute;
   border-radius: 50%;
@@ -140,13 +144,20 @@
 }
 
 /* ==========================================
-   3. KEYFRAMES
+   3. KEYFRAMES DE LAS ANIMACIONES
    ========================================== */
+
+/* Subir y bajar suavemente */
 @keyframes floatStar {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
+/* Resplandor pulsante en el círculo */
 @keyframes glowPulse {
   0%, 100% {
     box-shadow: 0 0 30px rgba(240, 182, 81, 0.2), inset 0 0 20px rgba(240, 182, 81, 0.1);
@@ -156,24 +167,33 @@
   }
 }
 
+/* Titilado de la estrellita superior */
 @keyframes pulseSparkle {
-  0% { transform: scale(0.9); opacity: 0.85; }
-  100% { transform: scale(1.15); opacity: 1; }
+  0% {
+    transform: scale(0.9);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
 }
 
+/* Movimiento flotante orbital suave */
 @keyframes floatOrbit {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(5px, -7px); }
-}
-
-@keyframes starTwinkle {
-  0% { opacity: 0.5; }
-  100% { opacity: 1; }
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(5px, -7px);
+  }
 }
 
 /* ==========================================
    4. TIPOGRAFÍA Y TEXTOS
    ========================================== */
+
+/* Título principal exacto */
 .title {
   font-size: 3rem;
   font-weight: 900;
@@ -184,6 +204,7 @@
   text-shadow: 0 4px 20px rgba(243, 189, 88, 0.25);
 }
 
+/* Calificación con mini estrellas */
 .star-rating {
   color: #f3bd58;
   font-size: 0.95rem;
@@ -194,10 +215,16 @@
   opacity: 0.9;
 }
 
-.star-rating span { display: inline-block; }
-.star-rating span:nth-child(1),
-.star-rating span:nth-child(2) { opacity: 0.35; }
+.star-rating span {
+  display: inline-block;
+}
 
+.star-rating span:nth-child(1),
+.star-rating span:nth-child(2) {
+  opacity: 0.35; /* Las dos primeras más oscuras como en la imagen */
+}
+
+/* Descripción */
 .description {
   font-size: 1.15rem;
   color: #a7acbe;
@@ -212,7 +239,7 @@
 }
 
 /* ==========================================
-   5. BOTONES
+   5. BOTONES IDÉNTICOS A LA IMAGEN
    ========================================== */
 .button-group {
   display: flex;
@@ -235,9 +262,9 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  text-decoration: none;
 }
 
+/* Botón Principal (Dorado / Naranja centrado) */
 .btn-primary {
   background: linear-gradient(180deg, #f2c062 0%, #e59d38 100%);
   color: #11131e;
@@ -250,8 +277,11 @@
   filter: brightness(1.05);
 }
 
-.btn-primary:active { transform: translateY(1px); }
+.btn-primary:active {
+  transform: translateY(1px);
+}
 
+/* Botón Secundario (Oscuro con borde suave) */
 .btn-secondary {
   background-color: rgba(23, 27, 45, 0.7);
   color: #c0c6d8;
@@ -265,22 +295,108 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.btn-secondary:active { transform: translateY(1px); }
+.btn-secondary:active {
+  transform: translateY(1px);
+}
 
-/* Adaptación automática para el Modo Claro */
-:root:not(.dark) .container {
+/* ==========================================
+   1. RESET Y FONDO ESTRELLADO VISIBLE
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #050711;
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 30px 20px;
+  text-align: center;
+  position: relative;
+  
+  /* Fondo Galaxia con gradientes más profundos */
   background: 
-    radial-gradient(circle at 50% 35%, rgba(229, 157, 56, 0.15) 0%, transparent 65%),
-    radial-gradient(circle at 50% 50%, #f8f9fa 0%, #e2e8f0 100%);
-  color: #1e2029;
+    radial-gradient(circle at 50% 35%, rgba(65, 58, 100, 0.45) 0%, transparent 65%),
+    radial-gradient(circle at 50% 50%, #0d1021 0%, #04050c 100%);
 }
 
-:root:not(.dark) .description {
-  color: #4a5568;
+/* Capa 1 de estrellas: Estrellas pequeñas y brillantes */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(1.5px 1.5px at 15px 25px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 45px 80px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 95px 35px, rgba(255, 230, 180, 0.9), rgba(0,0,0,0)),
+    radial-gradient(2.5px 2.5px at 150px 130px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 220px 180px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 290px 60px, rgba(255, 220, 150, 0.9), rgba(0,0,0,0)),
+    radial-gradient(3px 3px at 350px 170px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 380px 40px, #ffffff, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 320px 320px;
+  opacity: 0.95; /* Mayor opacidad para que resalten */
+  
+  /* Animación de titilado suave */
+  animation: starTwinkle 4s infinite alternate ease-in-out;
 }
 
-:root:not(.dark) .btn-secondary {
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #1e2029;
-  border-color: rgba(0, 0, 0, 0.12);
+/* Capa 2 de estrellas: Polvo estelar y destellos grandes adicionales */
+.container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(2px 2px at 70px 190px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(3px 3px at 120px 40px, rgba(243, 189, 88, 0.9), rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 200px 90px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2.5px 2.5px at 260px 220px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 330px 110px, rgba(160, 180, 255, 0.9), rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 450px 450px;
+  opacity: 0.85;
+  animation: starTwinkle 3s infinite alternate-reverse ease-in-out;
+}
+
+/* ==========================================
+   AGREGAR EN TU SECCIÓN DE @KEYFRAMES
+   ========================================== */
+
+/* Animación para que las estrellas del fondo parpadeen */
+@keyframes starTwinkle {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+.btn {
+  text-decoration: none; /* 👈 Agrega esta línea en la clase .btn */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

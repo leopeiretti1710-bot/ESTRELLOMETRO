@@ -2,9 +2,10 @@ import React from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
 
-export default function Principal({ nombreEvento }) {
+export default function Principal() {
   return (
     <div className="container">
+      {/* Círculo Central con Animaciones */}
       <div className="hero-icon-wrapper">
         <div className="circle-glow">
           <span className="main-star">⭐</span>
@@ -14,8 +15,10 @@ export default function Principal({ nombreEvento }) {
         </div>
       </div>
 
+      {/* Título Principal */}
       <h1 className="title">Estrellómetro</h1>
 
+      {/* Estrellitas pequeñas */}
       <div className="star-rating">
         <span>★</span>
         <span>★</span>
@@ -24,12 +27,13 @@ export default function Principal({ nombreEvento }) {
         <span>★</span>
       </div>
 
+      {/* Texto Descriptivo */}
       <p className="description">
-        Evento activo: <strong style={{ color: '#f2c062' }}>{nombreEvento}</strong><br />
         Las mejores noches merecen <br />
         <span className="highlight">recordarse entre estrellas.</span>
       </p>
 
+      {/* Botones estilo pill / rounded */}
       <div className="button-group">
         <Link to="/unirse" className="btn btn-primary">
           ✨ Entrar a un evento

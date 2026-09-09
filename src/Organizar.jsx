@@ -2,26 +2,33 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Organizar.css';
 
-export default function Organizar({ nombreEvento, setNombreEvento }) {
+export default function Organizar() {
   const [tabActiva, setTabActiva] = useState('galeria');
 
-  // Estados iniciales vacíos para contenido
+  // Nombre del evento editable
+  const [nombreEvento, setNombreEvento] = useState('BODA2025');
+
+  // Estados iniciales vacíos
   const [fotos, setFotos] = useState([]);
   const [desafios, setDesafios] = useState([]);
 
-  // Formulario de desafíos
+  // Estados para el formulario de nuevo desafío
   const [nuevoTituloDesafio, setNuevoTituloDesafio] = useState('');
   const [nuevaDescDesafio, setNuevaDescDesafio] = useState('');
   const [mostrarFormDesafio, setMostrarFormDesafio] = useState(false);
 
+  // Referencia para el input de archivos oculto
   const inputFotoRef = useRef(null);
 
+  // Abre el explorador de archivos
   const abrirExploradorArchivos = () => {
     inputFotoRef.current?.click();
   };
 
+  // Procesa y agrega las imágenes seleccionadas
   const manejarSeleccionFoto = (e) => {
     const archivos = Array.from(e.target.files);
+
     if (archivos.length > 0) {
       const horaActual = new Date().toLocaleTimeString([], {
         hour: '2-digit',
@@ -40,6 +47,7 @@ export default function Organizar({ nombreEvento, setNombreEvento }) {
     }
   };
 
+  // Función para agregar un nuevo desafío
   const agregarDesafio = (e) => {
     e.preventDefault();
     if (!nuevoTituloDesafio.trim()) return;
@@ -59,6 +67,7 @@ export default function Organizar({ nombreEvento, setNombreEvento }) {
 
   return (
     <div className="contenedor-organizar">
+      {/* INPUT OCULTO PARA SUBIR FOTOS */}
       <input
         type="file"
         ref={inputFotoRef}
@@ -90,12 +99,13 @@ export default function Organizar({ nombreEvento, setNombreEvento }) {
         </div>
       </header>
 
-      {/* 2. TARJETA RESUMEN CON INPUT GLOBAL */}
+      {/* 2. TARJETA RESUMEN */}
       <section className="tarjeta-resumen-evento">
         <div className="resumen-header">
           <div style={{ flex: 1, marginRight: '12px' }}>
             <span className="etiqueta-activo">EVENTO ACTIVO</span>
             
+            {/* INPUT PARA ESCRIBIR O EDITAR EL NOMBRE DEL EVENTO */}
             <input
               type="text"
               value={nombreEvento}
@@ -227,6 +237,7 @@ export default function Organizar({ nombreEvento, setNombreEvento }) {
               </button>
             </div>
 
+            {/* FORMULARIO PARA AGREGAR DESAFÍOS */}
             {mostrarFormDesafio && (
               <form onSubmit={agregarDesafio} style={{ background: 'rgba(18, 22, 38, 0.8)', border: '1px solid rgba(255, 255, 255, 0.1)', padding: '14px', borderRadius: '14px', marginBottom: '16px' }}>
                 <input 
@@ -295,7 +306,7 @@ export default function Organizar({ nombreEvento, setNombreEvento }) {
             </div>
             <h2>Podio Final</h2>
             <p className="subtitulo-podio">
-              ¿Están listos para conocer las fotos más votadas de {nombreEvento}?
+              ¿Están listos para conocer las fotos más votadas de la noche?
             </p>
             <button className="btn-revelar-podio">Revelar Ganadores</button>
           </div>

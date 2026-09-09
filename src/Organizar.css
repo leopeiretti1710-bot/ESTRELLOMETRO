@@ -2,10 +2,10 @@
    1. RESET Y FONDO BASE
    ========================================== */
 .contenedor-organizar {
-  background-color: var(--background, #080a14);
-  color: var(--foreground, #ffffff);
+  background-color: #080a14;
+  color: #ffffff;
   min-height: 100vh;
-  width: 100%;
+  width: 100vw;
   padding: 24px 20px 100px 20px;
   margin: 0;
   font-family: 'Poppins', system-ui, -apple-system, sans-serif;
@@ -40,6 +40,7 @@
 /* ==========================================
    2. KEYFRAMES & ANIMACIONES SUTILES
    ========================================== */
+/* Transición de entrada suave al cambiar de pestaña */
 .animar-entrada {
   animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -55,6 +56,7 @@
   }
 }
 
+/* Brillo sutil para el badge de evento y contador */
 @keyframes pulseGlow {
   0%, 100% {
     box-shadow: 0 0 0px rgba(242, 192, 98, 0);
@@ -64,6 +66,7 @@
   }
 }
 
+/* Animación para el trofeo en el Podio */
 @keyframes floatTrophy {
   0%, 100% {
     transform: translateY(0);
@@ -128,7 +131,7 @@
 .contador-tiempo {
   background: rgba(242, 192, 98, 0.08);
   border: 1px solid rgba(242, 192, 98, 0.2);
-  color: var(--primary, #f2c062);
+  color: #f2c062;
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 12px;
@@ -169,13 +172,13 @@
 .resumen-header h3 {
   margin: 4px 0 0 0;
   font-size: 20px;
-  color: var(--primary, #f2c062);
+  color: #f2c062;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
 
 .btn-mas-foto {
-  background: var(--primary, #f2c062);
+  background: #f2c062;
   color: #080a14;
   border: none;
   padding: 9px 16px;
@@ -223,7 +226,7 @@
   font-weight: 700;
 }
 
-.text-amarillo { color: var(--primary, #f2c062); }
+.text-amarillo { color: #f2c062; }
 .text-violeta { color: #a78bfa; }
 .text-verde { color: #34d399; }
 
@@ -263,7 +266,7 @@
 .info-destacada h4 {
   margin: 0;
   font-size: 13px;
-  color: var(--primary, #f2c062);
+  color: #f2c062;
   font-weight: 600;
 }
 
@@ -347,7 +350,7 @@
   border-radius: 8px;
   font-size: 11px;
   font-weight: 600;
-  color: var(--primary, #f2c062);
+  color: #f2c062;
   order: 2;
   backdrop-filter: blur(4px);
 }
@@ -421,7 +424,7 @@
 .footer-desafio span { font-size: 11px; color: #82889e; }
 
 .btn-participar {
-  background: var(--primary, #f2c062);
+  background: #f2c062;
   color: #080a14;
   border: none;
   padding: 6px 12px;
@@ -466,7 +469,7 @@
 }
 
 .btn-revelar-podio {
-  background: var(--primary, #f2c062);
+  background: #f2c062;
   color: #080a14;
   border: none;
   padding: 14px 28px;
@@ -516,7 +519,7 @@
   border-radius: 6px;
 }
 
-.codigo-evento-texto { color: var(--primary, #f2c062); margin: 0 0 16px 0; font-size: 18px; font-weight: 700; }
+.codigo-evento-texto { color: #f2c062; margin: 0 0 16px 0; font-size: 18px; font-weight: 700; }
 
 .grupo-botones-qr {
   display: flex;
@@ -542,7 +545,7 @@
 
 .btn-principal-admin {
   flex: 1;
-  background: var(--primary, #f2c062);
+  background: #f2c062;
   border: none;
   color: #080a14;
   padding: 10px;
@@ -601,7 +604,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   background: rgba(8, 10, 20, 0.92);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px);
@@ -633,33 +636,10 @@
 }
 
 .item-tab.activo {
-  color: var(--primary, #f2c062);
+  color: #f2c062;
 }
 
 .item-tab.activo svg {
   transform: translateY(-2px);
   transition: transform 0.2s ease;
-}
-
-/* Adaptación automática para el Modo Claro */
-:root:not(.dark) .contenedor-organizar {
-  background: 
-    radial-gradient(circle at 50% 15%, rgba(229, 157, 56, 0.15) 0%, transparent 60%),
-    radial-gradient(circle at 50% 80%, #f8f9fa 0%, #e2e8f0 100%);
-  color: #1e2029;
-}
-
-:root:not(.dark) .tarjeta-resumen-evento,
-:root:not(.dark) .caja-buscador,
-:root:not(.dark) .tarjeta-desafio,
-:root:not(.dark) .caja-qr-admin,
-:root:not(.dark) .item-accion {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(0, 0, 0, 0.08);
-  color: #1e2029;
-}
-
-:root:not(.dark) .barra-navegacion-inferior {
-  background: rgba(255, 255, 255, 0.92);
-  border-top-color: rgba(0, 0, 0, 0.08);
 }
