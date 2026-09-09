@@ -266,3 +266,21 @@
 }
 
 .btn-secondary:active { transform: translateY(1px); }
+
+/* Adaptación automática para el Modo Claro */
+:root:not(.dark) .container {
+  background: 
+    radial-gradient(circle at 50% 35%, rgba(229, 157, 56, 0.15) 0%, transparent 65%),
+    radial-gradient(circle at 50% 50%, #f8f9fa 0%, #e2e8f0 100%);
+  color: #1e2029;
+}
+
+:root:not(.dark) .description {
+  color: #4a5568;
+}
+
+:root:not(.dark) .btn-secondary {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #1e2029;
+  border-color: rgba(0, 0, 0, 0.12);
+}

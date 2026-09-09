@@ -1,30 +1,25 @@
 /* ==========================================
-   1. RESET Y FONDO GALÁCTICO COMPLETO (100% Pantalla)
+   1. RESET Y FONDO GALÁCTICO COMPLETO
    ========================================== */
 .contenedor-unirse {
-  background-color: #050711;
-  color: #ffffff;
+  background-color: var(--background, #050711);
+  color: var(--foreground, #ffffff);
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   padding: 40px 20px;
   margin: 0;
   font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   box-sizing: border-box;
   position: relative;
   overflow-x: hidden;
-  
-  /* Permite centrar el contenido en pantallas grandes */
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* Fondo estilo nebulosa expandido a toda la pantalla */
   background: 
     radial-gradient(circle at 50% 25%, rgba(75, 65, 120, 0.45) 0%, transparent 65%),
     radial-gradient(circle at 50% 60%, #0c0f20 0%, #04050c 100%);
 }
 
-/* Capa de Estrellas Titilantes */
 .contenedor-unirse::before {
   content: '';
   position: absolute;
@@ -53,7 +48,6 @@
   100% { opacity: 1; }
 }
 
-/* Animación de entrada al cambiar pestañas */
 .animar-entrada {
   animation: fadeIn 0.35s ease-out forwards;
 }
@@ -76,17 +70,16 @@
 .tabs, 
 .contenido-tab {
   width: 100%;
-  max-width: 480px; /* Ancho cómodo para móviles */
+  max-width: 480px;
   position: relative;
   z-index: 2;
 }
 
-/* Ajustes automáticos para PC y Laptops grandes */
 @media (min-width: 768px) {
   .encabezado, 
   .tabs, 
   .contenido-tab {
-    max-width: 580px; /* Se expande en escritorios */
+    max-width: 580px;
   }
 
   .contenedor-unirse {
@@ -213,12 +206,11 @@
   50% { box-shadow: 0 0 35px rgba(242, 192, 98, 0.3); }
 }
 
-/* Esquinas decorativas doradas */
 .esquina {
   position: absolute;
   width: 18px;
   height: 18px;
-  border-color: #f2c062;
+  border-color: var(--primary, #f2c062);
   border-style: solid;
 }
 .top-left { top: 12px; left: 12px; border-width: 3px 0 0 3px; border-top-left-radius: 6px; }
@@ -226,13 +218,12 @@
 .bottom-left { bottom: 12px; left: 12px; border-width: 0 0 3px 3px; border-bottom-left-radius: 6px; }
 .bottom-right { bottom: 12px; right: 12px; border-width: 0 3px 3px 0; border-bottom-right-radius: 6px; }
 
-/* Línea láser de escaneo */
 .linea-escaner {
   position: absolute;
   width: 85%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #f2c062, transparent);
-  box-shadow: 0 0 10px #f2c062;
+  background: linear-gradient(90deg, transparent, var(--primary, #f2c062), transparent);
+  box-shadow: 0 0 10px var(--primary, #f2c062);
   animation: escanearLinea 2.5s infinite ease-in-out;
 }
 
@@ -284,7 +275,7 @@
 .cartel-mensaje {
   background: rgba(242, 192, 98, 0.08);
   border: 1px solid rgba(242, 192, 98, 0.3);
-  color: #f2c062;
+  color: var(--primary, #f2c062);
   padding: 14px;
   border-radius: 16px;
   text-align: center;
@@ -321,7 +312,7 @@
   border-radius: 14px;
   border: 1px solid rgba(242, 192, 98, 0.3);
   background: rgba(11, 13, 25, 0.85);
-  color: #f2c062;
+  color: var(--primary, #f2c062);
   font-size: 18px;
   text-align: center;
   font-weight: 700;
@@ -333,7 +324,7 @@
 }
 
 .input-codigo:focus {
-  border-color: #f2c062;
+  border-color: var(--primary, #f2c062);
   box-shadow: 0 0 14px rgba(242, 192, 98, 0.25);
 }
 
@@ -392,5 +383,23 @@
 .botones-recientes button:hover {
   background: rgba(242, 192, 98, 0.15);
   border-color: rgba(242, 192, 98, 0.3);
-  color: #f2c062;
+  color: var(--primary, #f2c062);
+}
+
+/* Adaptación automática para el Modo Claro */
+:root:not(.dark) .contenedor-unirse {
+  background: 
+    radial-gradient(circle at 50% 25%, rgba(229, 157, 56, 0.15) 0%, transparent 65%),
+    radial-gradient(circle at 50% 60%, #f8f9fa 0%, #e2e8f0 100%);
+  color: #1e2029;
+}
+
+:root:not(.dark) .tarjeta-input {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+:root:not(.dark) .input-codigo {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(229, 157, 56, 0.4);
 }
