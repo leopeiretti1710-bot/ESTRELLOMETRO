@@ -2,30 +2,26 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Organizar.css';
 
-export default function Organizar() {
+export default function Organizar({ nombreEvento, setNombreEvento }) {
   const [tabActiva, setTabActiva] = useState('galeria');
 
-  // Estados iniciales completamente vacíos
+  // Estados iniciales vacíos para contenido
   const [fotos, setFotos] = useState([]);
   const [desafios, setDesafios] = useState([]);
 
-  // Estados para el formulario de nuevo desafío
+  // Formulario de desafíos
   const [nuevoTituloDesafio, setNuevoTituloDesafio] = useState('');
   const [nuevaDescDesafio, setNuevaDescDesafio] = useState('');
   const [mostrarFormDesafio, setMostrarFormDesafio] = useState(false);
 
-  // Referencia para el input de archivos oculto
   const inputFotoRef = useRef(null);
 
-  // Abre el explorador de archivos
   const abrirExploradorArchivos = () => {
     inputFotoRef.current?.click();
   };
 
-  // Procesa y agrega las imágenes seleccionadas
   const manejarSeleccionFoto = (e) => {
     const archivos = Array.from(e.target.files);
-
     if (archivos.length > 0) {
       const horaActual = new Date().toLocaleTimeString([], {
         hour: '2-digit',
@@ -44,7 +40,6 @@ export default function Organizar() {
     }
   };
 
-  // Función para agregar un nuevo desafío
   const agregarDesafio = (e) => {
     e.preventDefault();
     if (!nuevoTituloDesafio.trim()) return;
@@ -64,7 +59,6 @@ export default function Organizar() {
 
   return (
     <div className="contenedor-organizar">
-      {/* INPUT OCULTO PARA SUBIR FOTOS */}
       <input
         type="file"
         ref={inputFotoRef}
@@ -83,7 +77,7 @@ export default function Organizar() {
             </svg>
           </Link>
           <div>
-            <h2>Panel del Evento</h2>
+            <h2>{nombreEvento || 'Nombre del evento'}</h2>
             <p>{fotos.length} fotos · 0 invitados</p>
           </div>
         </div>
@@ -96,12 +90,31 @@ export default function Organizar() {
         </div>
       </header>
 
-      {/* 2. TARJETA RESUMEN */}
+      {/* 2. TARJETA RESUMEN CON INPUT GLOBAL */}
       <section className="tarjeta-resumen-evento">
         <div className="resumen-header">
-          <div>
+          <div style={{ flex: 1, marginRight: '12px' }}>
             <span className="etiqueta-activo">EVENTO ACTIVO</span>
-            <h3>BODA2025</h3>
+            
+            <input
+              type="text"
+              value={nombreEvento}
+              onChange={(e) => setNombreEvento(e.target.value)}
+              placeholder="Nombre de tu evento..."
+              style={{
+                background: 'transparent',
+                border: 'none',
+                borderBottom: '1px dashed rgba(242, 192, 98, 0.4)',
+                color: '#f2c062',
+                fontSize: '20px',
+                fontWeight: '700',
+                letterSpacing: '0.5px',
+                width: '100%',
+                outline: 'none',
+                marginTop: '4px',
+                padding: '2px 0'
+              }}
+            />
           </div>
           <button className="btn-mas-foto" onClick={abrirExploradorArchivos}>
             + Foto
@@ -214,7 +227,6 @@ export default function Organizar() {
               </button>
             </div>
 
-            {/* FORMULARIO PARA AGREGAR DESAFÍOS */}
             {mostrarFormDesafio && (
               <form onSubmit={agregarDesafio} style={{ background: 'rgba(18, 22, 38, 0.8)', border: '1px solid rgba(255, 255, 255, 0.1)', padding: '14px', borderRadius: '14px', marginBottom: '16px' }}>
                 <input 
@@ -283,7 +295,7 @@ export default function Organizar() {
             </div>
             <h2>Podio Final</h2>
             <p className="subtitulo-podio">
-              ¿Están listos para conocer las fotos más votadas de la noche?
+              ¿Están listos para conocer las fotos más votadas de {nombreEvento}?
             </p>
             <button className="btn-revelar-podio">Revelar Ganadores</button>
           </div>
@@ -297,7 +309,7 @@ export default function Organizar() {
               <div className="grafico-qr-placeholder">
                 <div className="qr-patron"></div>
               </div>
-              <h2 className="codigo-evento-texto">BODA2025</h2>
+              <h2 className="codigo-evento-texto">{nombreEvento || 'EVENTO'}</h2>
               <div className="grupo-botones-qr">
                 <button className="btn-secundario-admin">Descargar</button>
                 <button className="btn-principal-admin">Compartir link</button>

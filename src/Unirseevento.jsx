@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Unirseevento.css';
 
-export default function JoinEvent() {
+export default function JoinEvent({ nombreEvento, setNombreEvento }) {
   const [pestana, setPestana] = useState('qr');
-  const [codigo, setCodigo] = useState('');
 
   return (
     <div className="contenedor-unirse">
-      {/* Encabezado */}
       <div className="encabezado">
         <Link to="/" className="btn-volver">←</Link>
         <div>
@@ -17,7 +15,6 @@ export default function JoinEvent() {
         </div>
       </div>
 
-      {/* Selector de Pestañas */}
       <div className="tabs">
         <button 
           className={pestana === 'qr' ? 'tab activa' : 'tab'} 
@@ -33,33 +30,29 @@ export default function JoinEvent() {
         </button>
       </div>
 
-      {/* Pestaña 1: Escanear QR */}
       {pestana === 'qr' && (
         <div className="contenido-tab animar-entrada">
           <div className="caja-qr">
             <div className="cuadro-camara">
-              {/* Esquinas decorativas doradas */}
               <span className="esquina top-left"></span>
               <span className="esquina top-right"></span>
               <span className="esquina bottom-left"></span>
               <span className="esquina bottom-right"></span>
               
               <span className="texto-camara">CÁMARA</span>
-              {/* Línea de escaneo animada */}
               <div className="linea-escaner"></div>
             </div>
           </div>
-          <p className="instruccion">Apuntá la cámara al código QR del evento</p>
+          <p className="instruccion">Apuntá la cámara al código QR de {nombreEvento}</p>
           <p className="estado-escaneo">
             <span className="punto-verde"></span> Escaneando...
           </p>
           <div className="cartel-mensaje">
-            ✨ QR detectado · Uniéndose automáticamente...
+            ✨ QR detectado · Uniéndose a {nombreEvento}...
           </div>
         </div>
       )}
 
-      {/* Pestaña 2: Código Manual */}
       {pestana === 'manual' && (
         <div className="contenido-tab animar-entrada">
           <div className="tarjeta-input">
@@ -69,21 +62,21 @@ export default function JoinEvent() {
             <input 
               type="text" 
               placeholder="Ej: BODA2025" 
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value.toUpperCase())}
+              value={nombreEvento}
+              onChange={(e) => setNombreEvento(e.target.value.toUpperCase())}
               className="input-codigo"
             />
 
-            <button className={`btn-unirse ${codigo.length > 0 ? 'activo' : ''}`}>
-              Unirse →
+            <button className={`btn-unirse ${nombreEvento.length > 0 ? 'activo' : ''}`}>
+              Unirse a {nombreEvento || 'evento'} →
             </button>
 
             <div className="eventos-recientes">
               <p>Eventos recientes:</p>
               <div className="botones-recientes">
-                <button type="button" onClick={() => setCodigo('BODA2025')}>BODA2025</button>
-                <button type="button" onClick={() => setCodigo('XV-SOFIA')}>XV-SOFIA</button>
-                <button type="button" onClick={() => setCodigo('CUMP-JULI')}>CUMP-JULI</button>
+                <button type="button" onClick={() => setNombreEvento('BODA2025')}>BODA2025</button>
+                <button type="button" onClick={() => setNombreEvento('XV-SOFIA')}>XV-SOFIA</button>
+                <button type="button" onClick={() => setNombreEvento('CUMP-JULI')}>CUMP-JULI</button>
               </div>
             </div>
           </div>
