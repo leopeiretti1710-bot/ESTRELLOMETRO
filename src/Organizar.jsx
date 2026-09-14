@@ -4,61 +4,49 @@ import './Organizar.css';
 
 export default function Organizar() {
   const [tabActiva, setTabActiva] = useState('galeria');
-
-  // Nombre del evento editable
   const [nombreEvento, setNombreEvento] = useState('BODA2025');
-
-  // Estados iniciales vacíos
   const [fotos, setFotos] = useState([]);
   const [desafios, setDesafios] = useState([]);
-
-  // Estados para el formulario de nuevo desafío
   const [nuevoTituloDesafio, setNuevoTituloDesafio] = useState('');
   const [nuevaDescDesafio, setNuevaDescDesafio] = useState('');
   const [mostrarFormDesafio, setMostrarFormDesafio] = useState(false);
 
-  // Referencia para el input de archivos oculto
+  // Nuevo estado para la vista previa
+  const [mostrarVistaPrevia, setMostrarVistaPrevia] = useState(false);
+
   const inputFotoRef = useRef(null);
 
-  // Abre el explorador de archivos
   const abrirExploradorArchivos = () => {
     inputFotoRef.current?.click();
   };
 
-  // Procesa y agrega las imágenes seleccionadas
   const manejarSeleccionFoto = (e) => {
     const archivos = Array.from(e.target.files);
-
     if (archivos.length > 0) {
       const horaActual = new Date().toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit'
       });
-
       const nuevasFotos = archivos.map((archivo, index) => ({
         id: Date.now() + index,
         url: URL.createObjectURL(archivo),
         estrellas: 0,
         hora: horaActual
       }));
-
       setFotos((prevFotos) => [...nuevasFotos, ...prevFotos]);
       setTabActiva('galeria');
     }
   };
 
-  // Función para agregar un nuevo desafío
   const agregarDesafio = (e) => {
     e.preventDefault();
     if (!nuevoTituloDesafio.trim()) return;
-
     const nuevo = {
       id: Date.now(),
       titulo: nuevoTituloDesafio,
       descripcion: nuevaDescDesafio || 'Sin descripción',
       participantes: 0
     };
-
     setDesafios((prev) => [...prev, nuevo]);
     setNuevoTituloDesafio('');
     setNuevaDescDesafio('');
@@ -67,7 +55,6 @@ export default function Organizar() {
 
   return (
     <div className="contenedor-organizar">
-      {/* INPUT OCULTO PARA SUBIR FOTOS */}
       <input
         type="file"
         ref={inputFotoRef}
@@ -77,7 +64,7 @@ export default function Organizar() {
         style={{ display: 'none' }}
       />
 
-      {/* 1. ENCABEZADO SUPERIOR */}
+      {/* 1. ENCABEZADO SUPERIOR CON BOTÓN DE VISTA PREVIA */}
       <header className="encabezado-evento">
         <div className="info-evento">
           <Link to="/" className="btn-volver-evento" aria-label="Volver">
@@ -90,12 +77,28 @@ export default function Organizar() {
             <p>{fotos.length} fotos · 0 invitados</p>
           </div>
         </div>
-        <div className="contador-tiempo">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
-          <span>En curso</span>
+
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {/* BOTÓN DE VISTA PREVIA */}
+          <button 
+            className="btn-vista-previa" 
+            onClick={() => setMostrarVistaPrevia(true)}
+            title="Vista previa del invitado"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <span>Preview</span>
+          </button>
+
+          <div className="contador-tiempo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span>En curso</span>
+          </div>
         </div>
       </header>
 
@@ -104,8 +107,6 @@ export default function Organizar() {
         <div className="resumen-header">
           <div style={{ flex: 1, marginRight: '12px' }}>
             <span className="etiqueta-activo">EVENTO ACTIVO</span>
-            
-            {/* INPUT PARA ESCRIBIR O EDITAR EL NOMBRE DEL EVENTO */}
             <input
               type="text"
               value={nombreEvento}
@@ -173,7 +174,7 @@ export default function Organizar() {
 
       {/* 3. VISTAS Y CONTENIDO */}
       <main className="contenido-seccion animar-entrada">
-        {/* PESTAÑA: GALERÍA */}
+        {/* GALERÍA */}
         {tabActiva === 'galeria' && (
           <div className="vista-galeria">
             {fotos.length > 0 && (
@@ -218,7 +219,7 @@ export default function Organizar() {
           </div>
         )}
 
-        {/* PESTAÑA: DESAFÍOS */}
+        {/* DESAFÍOS */}
         {tabActiva === 'desafios' && (
           <div className="vista-desafios">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -237,7 +238,6 @@ export default function Organizar() {
               </button>
             </div>
 
-            {/* FORMULARIO PARA AGREGAR DESAFÍOS */}
             {mostrarFormDesafio && (
               <form onSubmit={agregarDesafio} style={{ background: 'rgba(18, 22, 38, 0.8)', border: '1px solid rgba(255, 255, 255, 0.1)', padding: '14px', borderRadius: '14px', marginBottom: '16px' }}>
                 <input 
@@ -291,7 +291,7 @@ export default function Organizar() {
           </div>
         )}
 
-        {/* PESTAÑA: PODIO */}
+        {/* PODIO */}
         {tabActiva === 'podio' && (
           <div className="vista-podio">
             <div className="círculo-copa-animado">
@@ -312,7 +312,7 @@ export default function Organizar() {
           </div>
         )}
 
-        {/* PESTAÑA: ADMIN */}
+        {/* ADMIN */}
         {tabActiva === 'admin' && (
           <div className="vista-admin">
             <div className="caja-qr-admin">
@@ -413,6 +413,44 @@ export default function Organizar() {
           <span className="texto-tab">Admin</span>
         </button>
       </nav>
+
+      {/* MODAL DE VISTA PREVIA (MODO INVITADO) */}
+      {mostrarVistaPrevia && (
+        <div className="overlay-vista-previa animar-entrada">
+          <div className="contenedor-modal-preview">
+            <header className="header-modal-preview">
+              <span className="tag-invitado">VISTA DEL INVITADO</span>
+              <button className="btn-cerrar-preview" onClick={() => setMostrarVistaPrevia(false)}>✕</button>
+            </header>
+
+            <div className="cuerpo-modal-preview">
+              <div className="banner-invitado">
+                <h2>✨ {nombreEvento || 'Evento'}</h2>
+                <p>¡Bienvenido! Subí tus fotos y votá tus favoritas.</p>
+              </div>
+
+              <button className="btn-subir-invitado" onClick={abrirExploradorArchivos}>
+                📸 Subir foto al evento
+              </button>
+
+              <div className="seccion-preview-fotos">
+                <h4>Fotos del evento ({fotos.length})</h4>
+                {fotos.length === 0 ? (
+                  <p className="texto-vacio">Aún no hay fotos en este evento.</p>
+                ) : (
+                  <div className="grid-fotos-preview">
+                    {fotos.map((f) => (
+                      <div key={f.id} className="tarjeta-foto-preview" style={{ backgroundImage: `url(${f.url})` }}>
+                        <button className="btn-votar-estrella">⭐ {f.estrellas}</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
