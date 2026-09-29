@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Unirseevento.css';
 
 export default function JoinEvent() {
   const [pestana, setPestana] = useState('qr');
   const [codigo, setCodigo] = useState('');
-
+  const navigate = useNavigate();
+  const ingresarAlEvento = (codigoIngresado) => {
+  if (!codigoIngresado) return;
+  navigate(`/evento/${codigoIngresado}`);
+};
   return (
     <div className="contenedor-unirse">
       {/* Encabezado */}
