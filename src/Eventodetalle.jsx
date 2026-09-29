@@ -1,7 +1,7 @@
 // EventoDetalle.jsx
 import React, { useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import './EventoDetalle.css';
+import './Eventodetalle.css';
 
 export default function EventoDetalle() {
   const { codigo } = useParams();
