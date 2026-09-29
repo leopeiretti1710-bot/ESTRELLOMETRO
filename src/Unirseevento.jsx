@@ -7,93 +7,56 @@ export default function JoinEvent() {
   const [pestana, setPestana] = useState('qr');
   const [codigo, setCodigo] = useState('');
   const navigate = useNavigate();
+  
   const ingresarAlEvento = (codigoIngresado) => {
   if (!codigoIngresado) return;
   navigate(`/evento/${codigoIngresado}`);
 };
+
   return (
-    <div className="contenedor-unirse">
-      {/* Encabezado */}
-      <div className="encabezado">
-        <Link to="/" className="btn-volver">←</Link>
-        <div>
-          <h2>Unirse al evento</h2>
-          <p>Escaneá el QR o ingresá el código</p>
+    <div className="join-event-container">
+      <div className="join-event-card">
+        
+        <div className="join-event-header">
+          <div className="join-event-icon">🎉</div>
+          <h2>Unirse al Evento</h2>
+          <p>Ingresá el código de la sala y tu nombre para empezar a compartir fotos.</p>
         </div>
-      </div>
 
-      {/* Selector de Pestañas */}
-      <div className="tabs">
-        <button 
-          className={pestana === 'qr' ? 'tab activa' : 'tab'} 
-          onClick={() => setPestana('qr')}
-        >
-          📷 Escanear QR
-        </button>
-        <button 
-          className={pestana === 'manual' ? 'tab activa' : 'tab'} 
-          onClick={() => setPestana('manual')}
-        >
-          ⌨️ Código manual
-        </button>
-      </div>
-
-      {/* Pestaña 1: Escanear QR */}
-      {pestana === 'qr' && (
-        <div className="contenido-tab animar-entrada">
-          <div className="caja-qr">
-            <div className="cuadro-camara">
-              {/* Esquinas decorativas doradas */}
-              <span className="esquina top-left"></span>
-              <span className="esquina top-right"></span>
-              <span className="esquina bottom-left"></span>
-              <span className="esquina bottom-right"></span>
-              
-              <span className="texto-camara">CÁMARA</span>
-              {/* Línea de escaneo animada */}
-              <div className="linea-escaner"></div>
-            </div>
-          </div>
-          <p className="instruccion">Apuntá la cámara al código QR del evento</p>
-          <p className="estado-escaneo">
-            <span className="punto-verde"></span> Escaneando...
-          </p>
-          <div className="cartel-mensaje">
-            ✨ QR detectado · Uniéndose automáticamente...
-          </div>
-        </div>
-      )}
-
-      {/* Pestaña 2: Código Manual */}
-      {pestana === 'manual' && (
-        <div className="contenido-tab animar-entrada">
-          <div className="tarjeta-input">
-            <h3>Código del evento</h3>
-            <p className="subtitulo-tarjeta">Ingresá el código que te compartió el organizador</p>
-            
+        <form className="join-event-form" onSubmit={(e) => e.preventDefault()}>
+          <div className="input-group">
+            <label>Código del Evento</label>
             <input 
               type="text" 
-              placeholder="Ej: BODA2025" 
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value.toUpperCase())}
-              className="input-codigo"
+              className="join-input code-input" 
+              placeholder="EJ: FIESTA-2026" 
+              maxLength={12}
+              required 
             />
-
-            <button className={`btn-unirse ${codigo.length > 0 ? 'activo' : ''}`}>
-              Unirse →
-            </button>
-
-            <div className="eventos-recientes">
-              <p>Eventos recientes:</p>
-              <div className="botones-recientes">
-                <button type="button" onClick={() => setCodigo('BODA2025')}>BODA2025</button>
-                <button type="button" onClick={() => setCodigo('XV-SOFIA')}>XV-SOFIA</button>
-                <button type="button" onClick={() => setCodigo('CUMP-JULI')}>CUMP-JULI</button>
-              </div>
-            </div>
           </div>
+
+          <div className="input-group">
+            <label>Tu Nombre / Apodo</label>
+            <input 
+              type="text" 
+              className="join-input" 
+              placeholder="¿Cómo te dicen?" 
+              required 
+            />
+          </div>
+
+          <button type="submit" className="btn-join-submit">
+            Ingresar a la Sala 🚀
+          </button>
+        </form>
+
+        <div className="join-event-footer">
+          <Link to="/" className="btn-back-link">
+            ← Volver al Inicio
+          </Link>
         </div>
-      )}
+
+      </div>
     </div>
   );
 }
