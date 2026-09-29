@@ -1,0 +1,245 @@
+/* EventoDetalle.css */
+.contenedor-evento-detalle {
+  background-color: #080a14;
+  color: #ffffff;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 20px 16px 90px 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  background: 
+    radial-gradient(circle at 50% 15%, rgba(65, 55, 110, 0.35) 0%, transparent 60%),
+    radial-gradient(circle at 50% 80%, #0a0c18 0%, #04050a 100%);
+}
+
+.encabezado-invitado,
+.seccion-subir-accion,
+.contenido-invitado {
+  width: 100%;
+  max-width: 480px;
+}
+
+@media (min-width: 768px) {
+  .encabezado-invitado,
+  .seccion-subir-accion,
+  .contenido-invitado {
+    max-width: 650px;
+  }
+}
+
+.encabezado-invitado {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.btn-volver-invitado {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.info-evento-invitado h2 {
+  font-size: 18px;
+  margin: 0;
+  color: #f2c062;
+}
+
+.info-evento-invitado p {
+  font-size: 12px;
+  color: #82889e;
+  margin: 2px 0 0 0;
+}
+
+.btn-subir-foto-invitado {
+  width: 100%;
+  background: linear-gradient(180deg, #f2c062 0%, #e59d38 100%);
+  color: #080a14;
+  border: none;
+  padding: 14px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(229, 157, 56, 0.3);
+  margin-bottom: 20px;
+  transition: transform 0.2s;
+}
+
+.btn-subir-foto-invitado:active {
+  transform: scale(0.98);
+}
+
+.filtros-galeria {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.btn-filtro {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #a0a5ba;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-filtro.activo {
+  background: rgba(242, 192, 98, 0.15);
+  border-color: rgba(242, 192, 98, 0.4);
+  color: #f2c062;
+}
+
+.grid-fotos-invitado {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .grid-fotos-invitado {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card-foto-invitado {
+  height: 180px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hora-foto-invitado {
+  font-size: 11px;
+  color: #a0a5ba;
+}
+
+.btn-votar-estrella {
+  background: rgba(8, 10, 20, 0.85);
+  border: 1px solid rgba(242, 192, 98, 0.4);
+  color: #f2c062;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.btn-votar-estrella.votado {
+  background: #f2c062;
+  color: #080a14;
+}
+
+.card-desafio-invitado {
+  background: rgba(18, 22, 38, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.card-desafio-invitado h4 {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+}
+
+.card-desafio-invitado p {
+  margin: 0 0 12px 0;
+  font-size: 12px;
+  color: #82889e;
+}
+
+.footer-desafio-invitado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #82889e;
+}
+
+.btn-participar-desafio {
+  background: #f2c062;
+  border: none;
+  color: #080a14;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.card-foto-ganadora {
+  height: 260px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  box-sizing: border-box;
+  border: 1px solid rgba(242, 192, 98, 0.3);
+}
+
+.badge-ganador {
+  background: #f2c062;
+  color: #080a14;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 12px;
+  align-self: flex-start;
+}
+
+.tabbar-invitado {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background: rgba(8, 10, 20, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+.tab-item {
+  background: transparent;
+  border: none;
+  color: #50566e;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tab-item.activo {
+  color: #f2c062;
+}
